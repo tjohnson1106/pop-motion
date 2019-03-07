@@ -2,6 +2,8 @@ import React from "react";
 import { View } from "react-native";
 
 import { keyframes, stagger } from "popmotion";
+import { duration } from "moment";
+import { inflate } from "zlib";
 
 const COUNT = 5;
 const DURATION = 4000;
@@ -22,9 +24,16 @@ class Motion extends Component {
             scale: 2,
             opacity: 0
           }
-        ]
+        ],
+        duration: DURATION,
+        loop: Infinity,
+        yoyo: Infinity
       })
     );
+
+    stagger(frames, DURATION / COUNT).start((animations) => {
+      this.setState({ animations });
+    });
   };
 
   render() {
