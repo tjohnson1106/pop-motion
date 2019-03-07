@@ -1,14 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { View } from "react-native";
 
 import Motion from "./src/Motion";
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Motion />
-      </View>
-    );
+    return <Motion />;
   }
 }

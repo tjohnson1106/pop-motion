@@ -1,10 +1,7 @@
-import React from "react";
-import { View, Animated } from "react-native";
-
+import React, { Component } from "react";
+import { View, Animated, Text, StyleSheet } from "react-native";
 import { keyframes, stagger } from "popmotion";
-import { duration } from "moment";
-import { inflate } from "zlib";
-import Animated from "react-native-reanimated";
+import { FontAwesome } from "@expo/vector-icons";
 
 const COUNT = 5;
 const DURATION = 4000;
@@ -44,7 +41,7 @@ class Motion extends Component {
   render() {
     return (
       <View style={styles.root}>
-        {this.state.animations.map(({ opacity, state }, index) => {
+        {this.state.animations.map(({ opacity, scale }, index) => {
           return (
             <Animated.View
               key={index}
@@ -58,10 +55,23 @@ class Motion extends Component {
             />
           );
         })}
+
+        <View style={styles.midCircle}>
+          <FontAwesome name="phone" style={styles.icon} />
+          <Text style={styles.animationText}>Calling...</Text>
+        </View>
       </View>
     );
   }
 }
+
+const getCircle = (radius, backgroundColor = "#7FFFD4") => ({
+  backgroundColor,
+  width: radius * 2,
+  height: radius * 2,
+  borderRadius: radius,
+  position: "absolute"
+});
 
 const styles = StyleSheet.create({
   root: {
@@ -70,12 +80,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff"
   },
-  circle: {
-    backgroundColor: "gold",
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    position: "absolue"
+  circle: getCircle(100),
+  midCircle: {
+    ...getCircle(75),
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  icon: {
+    color: "#fff",
+    fontSize: 42,
+    marginBottom: 5
+  },
+  animationText: {
+    color: "#fff",
+    fontSize: 18
   }
 });
 
